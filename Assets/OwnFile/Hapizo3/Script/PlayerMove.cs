@@ -13,15 +13,20 @@ public class PlayerMove : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D>();
     }
 
+	void Update()
+	{
+		Debug.Log( rb2d.velocity.magnitude );
+	}
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 		float axisHor = Input.GetAxis( "Horizontal" );
 		float axisVer = Input.GetAxis( "Vertical" );
 
 		if( ( axisHor != 0 ) || ( axisVer != 0 ) )
 		{
-			Debug.Log( axisHor + "," + axisVer );
+			//Debug.Log( axisHor + "," + axisVer );
 			this.gameObject.transform.position += axisHor * ( this.gameObject.transform.right * 0.1f );
 		}
 

@@ -43,4 +43,5 @@ public class PlayerMove3D : MonoBehaviour
 	{
 		this.gameObject.transform.position += axisHor * ( this.gameObject.transform.right * 0.1f );
 	}
+
 }
