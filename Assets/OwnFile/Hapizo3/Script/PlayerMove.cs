@@ -6,19 +6,29 @@ public class PlayerMove : MonoBehaviour
 {
 
 	Rigidbody2D rb2d;
+	//ジャンプパワー
 	[SerializeField] float jumpPower = 0;
+
+	//前進スピード
+	[SerializeField] float moveSpeed = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+		//自身のRigidbody取得
 		rb2d = GetComponent<Rigidbody2D>();
     }
 
 	void Update()
 	{
 		Debug.Log( rb2d.velocity.magnitude );
+
+		if( Input.GetKeyDown( "joystick button 0" ) )
+		{
+			Jump();	//ジャンプ
+		}
 	}
 
-    // Update is called once per frame
     void FixedUpdate()
     {
 		float axisHor = Input.GetAxis( "Horizontal" );
@@ -26,16 +36,35 @@ public class PlayerMove : MonoBehaviour
 
 		if( ( axisHor != 0 ) || ( axisVer != 0 ) )
 		{
-			//Debug.Log( axisHor + "," + axisVer );
-			this.gameObject.transform.position += axisHor * ( this.gameObject.transform.right * 0.1f );
-		}
-
-		if( Input.GetKeyDown( "joystick button 0" ) )
-		{
-			//rb2d = GetComponent<Rigidbody2D>();
-			rb2d.AddForce( Vector2.up * jumpPower );
+			MoveForward( axisHor, axisVer );
 		}
 
 		//this.gameObject.transform.position += this.gameObject.transform.right;
     }
+
+	//前進処理
+	void MoveForward( float axisHor, float axisVer )
+	{
+		this.gameObject.transform.position += axisHor * ( this.gameObject.transform.right * 0.1f );
+	}
+
+	//ジャンプ処理
+	void Jump()
+	{
+		rb2d.AddForce( Vector2.up * jumpPower );
+	}
+
+	//void PlayerDirection()
+	//{
+
+	//}
+
+	Vector3 Direction
+	{
+
+		set {
+
+		}
+
+	}
 }
